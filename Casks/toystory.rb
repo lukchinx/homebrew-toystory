@@ -7,8 +7,8 @@ cask "toystory" do
   desc "Pixel-art desktop pet that walks along the bottom of your screen"
   homepage "https://github.com/lukchinx/toystory"
 
-  depends_on macos: ">= :tahoe"
   depends_on arch: :arm64
+  depends_on macos: :tahoe
 
   app "Toystory.app"
 
