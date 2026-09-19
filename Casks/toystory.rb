@@ -12,13 +12,15 @@ cask "toystory" do
 
   app "Toystory.app"
 
+  # Toystory is signed ad hoc and not notarized, so Gatekeeper would block the
+  # first launch. Clear the quarantine flag Homebrew applied on download.
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Toystory.app"]
+  end
+
   caveats <<~EOS
-    Toystory is signed ad hoc and is not notarized, so Gatekeeper blocks the
-    first launch. Clear the quarantine flag once after installing:
-
-      xattr -dr com.apple.quarantine /Applications/Toystory.app
-
-    Or open the app, dismiss the warning, then allow it once under
-    System Settings > Privacy & Security > Open Anyway.
+    Toystory is signed ad hoc and is not notarized. The installer cleared the
+    macOS quarantine flag so the app opens without a Gatekeeper prompt.
+    Upgrade with: brew upgrade --cask lukchinx/toystory/toystory
   EOS
 end
