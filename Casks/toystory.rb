@@ -13,12 +13,12 @@ cask "toystory" do
   app "Toystory.app"
 
   caveats <<~EOS
-    Toystory is signed ad hoc and is not notarized, so macOS blocks the first
-    launch of a downloaded copy. Install without the quarantine flag instead:
+    Toystory is signed ad hoc and is not notarized, so Gatekeeper blocks the
+    first launch. Clear the quarantine flag once after installing:
 
-      brew install --cask --no-quarantine toystory
+      xattr -dr com.apple.quarantine /Applications/Toystory.app
 
-    Or, after a normal install, allow it once under
+    Or open the app, dismiss the warning, then allow it once under
     System Settings > Privacy & Security > Open Anyway.
   EOS
 end
